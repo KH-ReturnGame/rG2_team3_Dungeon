@@ -9,13 +9,18 @@ public class MonsterManager : MonoBehaviour
 
     public GameObject monsterPrefab; // 생성할 몬스터 프리팹
     public Transform[] spawnPoints; // 몬스터가 생성될 위치
-    public List<Transform> monsterKind1_Nomal; // 이세계 (일반)
-    public List<Transform> monsterKind1_Hard;  // 이세계 (하드)
-    public List<Transform> monsterKind2_Nomal; // 사이버펑크 (일반)
-    public List<Transform> monsterKind2_Hard;  // 사이버펑크 (하드)
-
-
-
+//*****************************************************************************
+    //public List<Transform> Isekai_Nomal = new List<Transform>() {slime_N, goblin_N, skeleton_N}; // 이세계 (일반)
+    //public List<Transform> Isekai_Hard = new List<Transform>() {slime_H, goblin_H, skeleton_H, dragon};  // 이세계 (하드)
+    //public List<Transform> Cyberpunk_Nomal = new List<Transform>() {gun_N, sword_N, shield_N}; // 사이버펑크 (일반)
+    //public List<Transform> Cyberpunk_Hard = new List<Transform>() {gun_H, sword_H, shield_H, boss};  // 사이버펑크 (하드)
+    
+    
+    //*****************게임 오브젝트 만들고 하기***********************
+    
+    
+    
+    
     public float spawnInterval = 5f; // 몬스터 생성 주기
 
     private List<GameObject> activeMonsters = new List<GameObject>(); // 현재 활성화된 몬스터 리스트
