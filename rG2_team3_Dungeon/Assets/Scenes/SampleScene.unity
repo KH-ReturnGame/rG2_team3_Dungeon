@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 188938746}
   - component: {fileID: 188938745}
   - component: {fileID: 188938744}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -247,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 188938743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.86, y: 2.94, z: 0}
+  m_LocalPosition: {x: -34.37, y: 3.12, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -728,6 +728,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 188938743}
+  rangeOfScale:
+    min: 0.8
+    max: 1.5
   countToSpawn: 15
   minX: -19
   maxX: 22
@@ -735,8 +738,8 @@ MonoBehaviour:
   maxY: 11
   spawnableLayer:
     serializedVersion: 2
-    m_Bits: 0
-  boxSize: {x: 2, y: 2, z: 2}
+    m_Bits: 8
+  boxSize: {x: 44.1, y: 26.2, z: 0}
   boxRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!4 &976552895
 Transform:
