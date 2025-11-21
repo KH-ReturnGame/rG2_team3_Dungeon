@@ -10,7 +10,7 @@ public class NonOverlappingEdgeSpawner : MonoBehaviour
     public GameObject objectToSpawn;
     
     // ⭐ 스케일(크기)을 이 범위 내에서 무작위로 결정합니다.
-    public FloatRange rangeOfScale = new FloatRange { min = 0.8f, max = 1.5f };
+    public FloatRange rangeOfScale = new FloatRange { min = 2f, max = 4f };
 
     // ⭐ 위치를 저장하는 리스트는 사용하지 않고, Physics.CheckBox를 사용합니다.
     // List<int> position = new List<int>(); // 주석 처리 또는 제거
@@ -20,7 +20,7 @@ public class NonOverlappingEdgeSpawner : MonoBehaviour
     public float minX = -19f; 
     public float maxX = 22f;
     public float minY = -11f; 
-    public float maxY = 11f;
+    public float maxY = 11f;   
 
     public LayerMask spawnableLayer; 
     
