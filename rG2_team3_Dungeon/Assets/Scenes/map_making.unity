@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 791548400}
   - component: {fileID: 791548399}
   m_Layer: 0
-  m_Name: MonterManager
+  m_Name: MonsterManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
