@@ -2,28 +2,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    // 각종 스크립트의 데이터 참조
+    public static GameManager instance;
 
-    public bool isLive;
+    public PoolManager pool;
+    public Player player;
 
-    public float health;
-    public float maxHealth;
-    public float speed;
-
-    public PlayerMove player;
-    
     void Awake()
     {
-        Instance = this;
+        instance = this;
     }
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = maxHealth;
-        player.speed = speed;
-
-        isLive = true;
+        
     }
 
     // Update is called once per frame

@@ -1,48 +1,72 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
+    // 움직임
+    public float speed = 3;
     public float health;
-    public Rigidbody2D target;
+    public Sprite[] sprites;
+    Rigidbody2D target;
 
-    Rigidbody2D rb;
-    SpriteRenderer render;
+    // 생존 여부
+    bool isLive = true;
+
+    // 컴포넌트 변수
+    Rigidbody2D rigid;
+    SpriteRenderer spriter;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        render = rb.GetComponent<SpriteRenderer>();
-    }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+        // 컴포넌트 변수 초기화
+        rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>();
     }
 
     void OnEnable()
     {
-        target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 타겟 초기화
+        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
+        isLive = true;
     }
 
     void FixedUpdate()
     {
-        Vector2 dirVec = target.position - rb.position;
-        Vector2 nextVec = dirVec.normalized * Time.fixedDeltaTime * speed;
-        rb.MovePosition(rb.position + nextVec);
-        rb.linearVelocity = Vector2.zero;
+        // 사망 시 정지
+        if(!isLive)
+        {
+            return;
+        }
+        
+        // 타겟을 향해 이동
+        Vector2 dirVec = target.position - rigid.position;
+        Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + nextVec);
+        rigid.linearVelocity = Vector2.zero;
     }
 
     void LateUpdate()
     {
-        render.flipX = target.position.x > rb.position.x;
+        // 시망 시 정지
+        if(!isLive)
+        {
+            return;
+        }
+        
+        // 좌우 반전
+        spriter.flipX = target.position.x > rigid.position.x;
+    }
+
+    public void Init(SpawnData data)
+    {
+        // 스폰 데이터 반영
+        spriter.sprite = sprites[data.spriteType];
+        speed = data.speed;
+        health = data.health;
+    }
+
+    public void Dead()
+    {
+        gameObject.SetActive(false);
     }
 }
