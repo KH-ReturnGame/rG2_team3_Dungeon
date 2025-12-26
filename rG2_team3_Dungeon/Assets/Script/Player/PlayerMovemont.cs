@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
+
     void Start()
     {
         
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        moveSpeed = 10f;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
     }
