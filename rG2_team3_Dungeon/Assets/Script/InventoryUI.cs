@@ -4,13 +4,14 @@ public class InventoryUI : MonoBehaviour
 {
     public GameObject itemSlotPrefab;
     public Transform slotParent;
-    public int slotCount = 8;
+    public ItemData[] items;
 
     void Start()
     {
-        for (int i = 0; i < slotCount; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            Instantiate(itemSlotPrefab, slotParent);
+            GameObject slot = Instantiate(itemSlotPrefab, slotParent);
+            slot.GetComponent<ItemSlot>().SetItem(items[i]);
         }
     }
 }
