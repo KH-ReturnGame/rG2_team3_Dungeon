@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bc9ce5b6e847a4ca9192ebad719377, type: 3}
   m_Name: Item1
   m_EditorClassIdentifier: 
-  itemName: "\uC544\uC774\uD15C1"
+  itemName: Potion1
   icon: {fileID: 0}
-  description: 
+  description: "\uB9C8\uC2DC\uBA74 \uC5B4\uB5A4 \uBCC0\uD654\uAC00 \uC0DD\uAE38\uC9C0\uB3C4"
   price: 100
-  ownedCount: 27
+  ownedCount: 0
