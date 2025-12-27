@@ -1,33 +1,43 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class state_s : MonoBehaviour
 {
     public int Shop_Hp = 0;      
     public int Shop_Atack = 0;   
-    public int Shop_speed = 0;   
+    public int Shop_speed = 0;
 
-    [Header("Dash (2D Skill 1)")]
-    private Rigidbody2D rb;           // 2D용 리지드바디
-    public float dashForce = 15f;    // 2D에서는 3D보다 작은 값이 적당할 수 있음
-    public float dashDuration = 0.2f; 
-    public float dashCooldown = 4f;   
-    private bool isskill_1Cooldown = false; 
+    public float moveSpeed = 10f; // 기본 속도
 
-    [Header("Invincible (Skill 2)")]
+    [Header("돌진 (Skill 1)")]
+    private bool canDash = true;
+    private bool isDashing;
+    [SerializeField] private float dashingPower = 35f; 
+    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
+
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Vector2 moveInput;
+    private Vector2 lastMoveDirection = Vector2.right; 
+
+    [Header("무적 (Skill 2)")]
     public float invincibleDuration = 1f;
     public float cooldownTime = 6f;
-    public Color invincibleColor = Color.yellow; 
+    public Color invincibleColor = Color.yellow;
     private bool isInvincible = false;
     private bool isskill_2Cooldown = false;
-    private SpriteRenderer spriteRenderer; // 2D는 보통 Renderer 대신 SpriteRenderer 사용
     private Color originalColor;  
 
     void Awake()
-    {
-        // 2D 컴포넌트 연결
-        rb = GetComponent<Rigidbody2D>(); 
+    {   
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 탑뷰 설정
+        rb.gravityScale = 0f;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         if (spriteRenderer != null)
         {
@@ -37,6 +47,24 @@ public class state_s : MonoBehaviour
 
     public void Update()
     {
+        if (isDashing) return;
+
+        // 1. 입력 감지
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
+
+        // 2. 마지막 방향 저장 (돌진용)
+        if (moveInput != Vector2.zero)
+        {
+            lastMoveDirection = moveInput.normalized;
+            
+            // 좌우 반전
+            if (moveInput.x != 0)
+            {
+                spriteRenderer.flipX = (moveInput.x < 0);
+            }
+        }
+
         // [E] 무적 스킬
         if (Input.GetKeyDown(KeyCode.E) && !isskill_2Cooldown && Shop_speed >= 5)
         {
@@ -44,44 +72,49 @@ public class state_s : MonoBehaviour
         }
 
         // [Q] 돌진 스킬
-        if (Input.GetKeyDown(KeyCode.Q) && !isskill_1Cooldown && Shop_speed >= 2)
+        if (Input.GetKeyDown(KeyCode.Q) && canDash)
         {
-            //StartCoroutine(skill_1());
+            StartCoroutine(Dash());
         }
     }
 
-    /*IEnumerator skill_1() // 2D 돌진
+    public void FixedUpdate()
     {
-        isskill_1Cooldown = true;
-        Debug.Log("2D 돌진 사용!");
-        //돌진 만들기
-        isskill_1Cooldown = false;
-        Debug.Log("돌진 쿨타임 종료");
-    }*/
+        if (isDashing) return;
 
-    IEnumerator skill_2() // 무적
+        // 이동 처리 (PlayerMovement의 로직을 이쪽으로 통합)
+        rb.linearVelocity = moveInput.normalized * moveSpeed;
+    }
+
+    IEnumerator Dash()
     {
-        Debug.Log("무적 시작");
+        canDash = false;
+        isDashing = true;
+
+        // 돌진 물리 적용
+        rb.linearVelocity = lastMoveDirection * dashingPower;
+
+        yield return new WaitForSeconds(dashingTime);
+
+        isDashing = false;
+        rb.linearVelocity = Vector2.zero; // 돌진 후 정지
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    IEnumerator skill_2()
+    {
         isInvincible = true;
         isskill_2Cooldown = true;
-
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = invincibleColor;
-        }
-
+        if (spriteRenderer != null) spriteRenderer.color = invincibleColor;
+        Debug.Log("무적시작");
         yield return new WaitForSeconds(invincibleDuration);
-        
         isInvincible = false;
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = originalColor;
-        }
-        Debug.Log("무적 종료");
-
+        Debug.Log("무적끝");
+        if (spriteRenderer != null) spriteRenderer.color = originalColor;
         yield return new WaitForSeconds(cooldownTime - invincibleDuration);
-
         isskill_2Cooldown = false;
-        Debug.Log("무적 쿨타임 종료");
+        Debug.Log("쿨 돌았음");
     }
 }
