@@ -8,6 +8,8 @@ public class state_s : MonoBehaviour
     public int Shop_Atack = 0;   
     public int Shop_speed = 0;
 
+    public bool adrenaline = false;//체력 낮으면 그거 하는거
+
     public float moveSpeed = 10f; // 기본 속도
 
     [Header("돌진 (Skill 1)")]
@@ -29,6 +31,8 @@ public class state_s : MonoBehaviour
     private bool isInvincible = false;
     private bool isskill_2Cooldown = false;
     private Color originalColor;  
+
+
 
     void Awake()
     {   
