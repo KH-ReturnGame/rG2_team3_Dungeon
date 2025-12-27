@@ -3,23 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-<<<<<<< HEAD
   tags: []
-=======
-  tags:
-  - Enemy
-  - Tile
-  - Bullet
->>>>>>> monsters
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-<<<<<<< HEAD
-  - wall
-=======
-  - Enemy
->>>>>>> monsters
+  - 
   - Water
   - UI
   - 
