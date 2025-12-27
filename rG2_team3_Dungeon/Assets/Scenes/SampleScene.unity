@@ -1390,6 +1390,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 4900827712972452251, guid: 4294872a27ceaec4f901c33dc41e242a, type: 3}
   - {fileID: 2199067289640932536, guid: 40e48ffde5c755d48b1db1661dfdeda6, type: 3}
+  - {fileID: 8589933370498498212, guid: f2445e7730e75b34b919657b8e5aed8f, type: 3}
 --- !u!1 &556504670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1761,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1170646424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170646425}
+  - component: {fileID: 1170646426}
+  m_Layer: 0
+  m_Name: Weapon_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1170646425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170646424}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1333956369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1170646426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170646424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7641c0b75af6cdb40b64bff8a668d4d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  prefabId: 2
+  damage: 10
+  count: 1
+  speed: 50
 --- !u!1 &1333956367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1901,7 @@ Transform:
   m_Children:
   - {fileID: 1825700407}
   - {fileID: 1583261360}
+  - {fileID: 1170646425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1333956371
@@ -1930,6 +1981,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  meleeWeapon: {fileID: 1583261361}
+  rangeWeapon: {fileID: 1170646426}
+  attackRange: 1.7
+  attackCooldown: 0.5
 --- !u!58 &1333956374
 CircleCollider2D:
   m_ObjectHideFlags: 0

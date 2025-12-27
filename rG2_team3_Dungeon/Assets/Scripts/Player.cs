@@ -11,6 +11,14 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriter;
 
+    public Weapon meleeWeapon;
+    public Weapon rangeWeapon;
+
+    public float attackRange = 2.5f;
+    public float attackCooldown = 0.5f;
+
+    float lastAttackTime;
+
     void Awake()
     {
         // 컴포넌트 변수 초기화
@@ -24,6 +32,11 @@ public class Player : MonoBehaviour
         // 방향 입력
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            TryAttack();
+        }
     }
 
     void FixedUpdate()
@@ -42,5 +55,30 @@ public class Player : MonoBehaviour
         }
     }
 
+    void TryAttack()
+    {
+        if (Time.time < lastAttackTime + attackCooldown)
+            return;
 
+        lastAttackTime = Time.time;
+
+        Vector3 mouseWorldPos = GetMouseWorldPosition();
+        float distance = Vector3.Distance(transform.position, mouseWorldPos);
+
+        if (distance <= attackRange)
+        {
+            meleeWeapon.Attack(mouseWorldPos);
+        }
+        else
+        {
+            rangeWeapon.Attack(mouseWorldPos);
+        }
+    }
+
+    Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.WorldToScreenPoint(transform.position).z;
+        return Camera.main.ScreenToWorldPoint(mousePos);
+    }
 }

@@ -4,22 +4,33 @@ public class Bullet : MonoBehaviour
 {
     public float damage;
     public int penetration;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    Vector3 dir;
 
-    public void Init(float dmg, int p)
+    public void Init(float dmg, int p, Vector3 d)
     {
         this.damage = dmg;
         this.penetration = p;
+        this.dir = d;
+    }
+
+    void Update()
+    {
+        transform.position += (Vector3)(dir * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Enemy") || !collision.CompareTag("Tile"))
+            return;
+
+        if (penetration > 0)
+        {
+            penetration--;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
