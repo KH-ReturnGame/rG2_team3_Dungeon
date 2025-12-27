@@ -1,0 +1,120 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class state_s : MonoBehaviour
+{
+    public int Shop_Hp = 0;      
+    public int Shop_Atack = 0;   
+    public int Shop_speed = 0;
+
+    public float moveSpeed = 10f; // 기본 속도
+
+    [Header("돌진 (Skill 1)")]
+    private bool canDash = true;
+    private bool isDashing;
+    [SerializeField] private float dashingPower = 35f; 
+    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
+
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Vector2 moveInput;
+    private Vector2 lastMoveDirection = Vector2.right; 
+
+    [Header("무적 (Skill 2)")]
+    public float invincibleDuration = 1f;
+    public float cooldownTime = 6f;
+    public Color invincibleColor = Color.yellow;
+    private bool isInvincible = false;
+    private bool isskill_2Cooldown = false;
+    private Color originalColor;  
+
+    void Awake()
+    {   
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 탑뷰 설정
+        rb.gravityScale = 0f;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+    }
+
+    public void Update()
+    {
+        if (isDashing) return;
+
+        // 1. 입력 감지
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
+
+        // 2. 마지막 방향 저장 (돌진용)
+        if (moveInput != Vector2.zero)
+        {
+            lastMoveDirection = moveInput.normalized;
+            
+            // 좌우 반전
+            if (moveInput.x != 0)
+            {
+                spriteRenderer.flipX = (moveInput.x < 0);
+            }
+        }
+
+        // [E] 무적 스킬
+        if (Input.GetKeyDown(KeyCode.E) && !isskill_2Cooldown && Shop_speed >= 5)
+        {
+            StartCoroutine(skill_2());
+        }
+
+        // [Q] 돌진 스킬
+        if (Input.GetKeyDown(KeyCode.Q) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    public void FixedUpdate()
+    {
+        if (isDashing) return;
+
+        // 이동 처리 (PlayerMovement의 로직을 이쪽으로 통합)
+        rb.linearVelocity = moveInput.normalized * moveSpeed;
+    }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+
+        // 돌진 물리 적용
+        rb.linearVelocity = lastMoveDirection * dashingPower;
+
+        yield return new WaitForSeconds(dashingTime);
+
+        isDashing = false;
+        rb.linearVelocity = Vector2.zero; // 돌진 후 정지
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    IEnumerator skill_2()
+    {
+        isInvincible = true;
+        isskill_2Cooldown = true;
+        if (spriteRenderer != null) spriteRenderer.color = invincibleColor;
+        Debug.Log("무적시작");
+        yield return new WaitForSeconds(invincibleDuration);
+        isInvincible = false;
+        Debug.Log("무적끝");
+        if (spriteRenderer != null) spriteRenderer.color = originalColor;
+        yield return new WaitForSeconds(cooldownTime - invincibleDuration);
+        isskill_2Cooldown = false;
+        Debug.Log("쿨 돌았음");
+    }
+}
