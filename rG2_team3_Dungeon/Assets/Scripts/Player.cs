@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
 
         if (distance <= attackRange)
         {
+            meleeWeapon.gameObject.SetActive(true);
             meleeWeapon.Attack(mouseWorldPos);
         }
         else

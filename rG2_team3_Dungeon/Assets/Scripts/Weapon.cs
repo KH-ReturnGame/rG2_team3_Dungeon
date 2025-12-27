@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
+                StopCoroutine(MeleeAttack());
                 StartCoroutine(MeleeAttack());
                 break;
             case 1:
@@ -29,27 +31,26 @@ public class Weapon : MonoBehaviour
 
     IEnumerator MeleeAttack()
     {
-        isAttacking = true;
+        float rotated = 0;
 
         GameObject meleeObj = new GameObject("MeleeAttack");
         meleeObj.transform.position = transform.position;
         meleeObj.transform.parent = transform;
+        yield return null;
 
         SetForm(meleeObj);
+        yield return null;
 
-        float rotated = 0f;
+        float delta = speed * Time.deltaTime;
+        transform.Rotate(Vector3.forward * delta);
+        rotated += Mathf.Abs(delta);
 
-        while (rotated < 360f)
+        if(rotated >= 360)
         {
-            float delta = speed * Time.deltaTime;
-            meleeObj.transform.Rotate(Vector3.forward * delta);
-            rotated += delta;
             yield return null;
         }
 
         Destroy(meleeObj);
-
-        isAttacking = false;
     }
 
     void RangeAttack(Vector3 targetPos)
@@ -61,12 +62,12 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Bullet>().Init(damage, 0, dir * speed);
     }
 
-    void SetForm(GameObject Obj)
+    void SetForm(GameObject obj)
     {
             for (int i = 0; i < count; i++)
             {
                 Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
-                bullet.parent = Obj.transform;
+                bullet.parent = obj.transform;
                 bullet.position = Vector2.zero;
 
                 Vector3 rotVec = Vector3.forward * 360 * i / count;
