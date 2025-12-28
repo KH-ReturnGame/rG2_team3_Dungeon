@@ -7,17 +7,26 @@ public class ObstacleController : MonoBehaviour
     public float appearanceDelay = 1.2f;
     public float activeDuration = 1f;
 
+    
+
     // 자식들을 담아둘 리스트
     private List<GameObject> childModels = new List<GameObject>();
 
     void Awake()
     {
+
+
         // 1. 부모 아래에 있는 모든 자식을 리스트에 담고 비활성화함
         foreach (Transform child in transform)
         {
             childModels.Add(child.gameObject);
             child.gameObject.SetActive(false);
         }
+    }
+    void Update()
+    {
+
+        
     }
 
     public void ReceiveSignal()

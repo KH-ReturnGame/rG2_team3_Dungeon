@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shop_Hp: 0
   Shop_Atack: 0
-  Shop_speed: 0
+  Shop_speed: 10
   player_Atack: 10
   player_MaxHP: 100
   moveSpeed: 10
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8de4084e07ecb347ac5b553b5f8ca01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 887739393}
+  mainboss: {fileID: 3558135935904571920, guid: f9e2bd2530e0c214590606c18315f3fa, type: 3}
 --- !u!1 &975754341
 GameObject:
   m_ObjectHideFlags: 0

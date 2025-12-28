@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // 씬 관리에 필요
 
 public class state_s : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class state_s : MonoBehaviour
     [Header("돌진 (Skill 1)")]
     private bool canDash = true;
     private bool isDashing;
-    [SerializeField] private float dashingPower = 35f; 
+    [SerializeField] private float dashingPower = 80f; 
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
 
@@ -49,14 +50,13 @@ public class state_s : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("스텟 초기화 앙 섹스");
+        Debug.Log("스텟 초기화");
         player_Atack = player_Atack + 4f*Shop_Atack;
         player_MaxHP = player_MaxHP + 10f*Shop_Hp;
         moveSpeed = moveSpeed + Shop_speed; 
     }
     public void Update()
     {
-        
         if (isDashing) return;
 
         // 1. 입력 감지
@@ -127,4 +127,31 @@ public class state_s : MonoBehaviour
         isskill_2Cooldown = false;
         Debug.Log("쿨 돌았음");
     }
+
+    void OnEnable()
+    {
+        // 씬 로드 이벤트 연결
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        // 이벤트 연결 해제 (메모리 누수 방지)
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 씬이 로드될 때마다 실행됨
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log(scene.name + " 씬이 로드되었습니다!");
+        /*player_Atack = player_Atack + 4f*Shop_Atack;
+        player_MaxHP = player_MaxHP + 10f*Shop_Hp;
+        moveSpeed = moveSpeed + Shop_speed; */
+        
+    }
+
+
+        
+    
+
 }

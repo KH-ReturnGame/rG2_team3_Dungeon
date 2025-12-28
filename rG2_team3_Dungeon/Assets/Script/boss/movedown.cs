@@ -5,8 +5,15 @@ using DG.Tweening;
 public class ObjectManager : MonoBehaviour
 {
     [Header("움직일 대상 (스크립트 없는 오브젝트)")]
-    public GameObject targetObject;
+    public boss_p mainboss;
+    void Update()
+    {
+    
+    }
+    void Awake()
+    {
 
+    }
     // 씬이 로드될 때 실행되도록 이벤트를 연결함
     void OnEnable()
     {
@@ -29,13 +36,12 @@ public class ObjectManager : MonoBehaviour
 
     public void MoveTargetToSouthEnd()
     {
-        if (targetObject == null) return;
 
-        targetObject.transform.DOKill();
+        this.transform.DOKill();
         
         // DOMove는 Vector3를 인자로 받으므로 new Vector3를 사용함
         // Y축만 -21로 이동하고 싶다면 DOMoveY를 사용함
-        targetObject.transform.DOMoveY(-21f, 1.0f);
+        this.transform.DOMoveY(-21f, 1.0f);
 
     }
 }
