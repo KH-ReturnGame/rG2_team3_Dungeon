@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class EventManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public Vector3 nextSpawnPoint; // ë‹¤ìŒ ì”¬ì—ì„œ ë‚˜íƒ€ë‚  ìœ„ì¹˜ ì €ì¥
+    public static EventManager instance;
+    public Vector3 nextSpawnPoint; // ´ÙÀ½ ¾À¿¡¼­ ³ªÅ¸³¯ À§Ä¡ ÀúÀå
 
-    public float player_MaxHP = 100f;//ìµœëŒ€ì²´ë ¥
-    public float player_Atack = 10f;//í”Œë ˆì´ì–´ ê³µê²©ë ¥
+    public float player_MaxHP = 100f;//ÃÖ´ëÃ¼·Â
+    public float player_Atack = 10f;//ÇÃ·¹ÀÌ¾î °ø°İ·Â
 
     public bool skill_1 = false;
     public bool skill_2 = false;

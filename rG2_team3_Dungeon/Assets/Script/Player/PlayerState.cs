@@ -7,8 +7,8 @@ public class PlayerState: MonoBehaviour
 
     public void Start()
     {
-        P_max_HP = GameManager.instance.player_MaxHP;//플레이어 최대 HP
-        P_Atack = GameManager.instance.player_Atack;// 플레이어 공격력
+        P_max_HP = EventManager.instance.player_MaxHP;//플레이어 최대 HP
+        P_Atack = EventManager.instance.player_Atack;// 플레이어 공격력
 
     }
 

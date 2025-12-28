@@ -20,7 +20,7 @@ public class Portal_sea : MonoBehaviour
         // 플레이어가 근처에 있고 Space 키를 누르면 실행
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.instance.nextSpawnPoint = spawnPosition;
+            EventManager.instance.nextSpawnPoint = spawnPosition;
             Debug.Log("아카네리제 최고다!!");
             SceneManager.LoadScene("sea");
         }
