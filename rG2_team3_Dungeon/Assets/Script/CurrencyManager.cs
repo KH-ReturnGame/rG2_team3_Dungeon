@@ -3,7 +3,6 @@ using TMPro;
 
 public class CurrencyManager : MonoBehaviour
 {
-    public int currentGold = 1000;
     public TMP_Text currencyText;
 
     void Start()
@@ -13,16 +12,20 @@ public class CurrencyManager : MonoBehaviour
 
     public bool SpendGold(int amount)
     {
-        if (currentGold < amount)
+        // DataManager 인스턴스의 골드를 사용
+        if (DataManager.instance.gold < amount)
             return false;
 
-        currentGold -= amount;
+        DataManager.instance.gold -= amount;
         UpdateUI();
         return true;
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
-        currencyText.text = currentGold.ToString();
+        if (DataManager.instance != null)
+        {
+            currencyText.text = DataManager.instance.gold.ToString("N0");
+        }
     }
-}
+} // 여기도 마지막 닫는 괄호가 필요합니다.
