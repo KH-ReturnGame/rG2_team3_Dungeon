@@ -12,7 +12,10 @@ public class state_s : MonoBehaviour
 
     public float player_Atack = 10f;
     public float player_MaxHP = 100f;
+    public float player_Hp;
     public float moveSpeed = 10f;
+
+    public bool ad = false;
 
     [Header("돌진 (Skill 1)")]
     private bool canDash = true;
@@ -36,6 +39,7 @@ public class state_s : MonoBehaviour
 
     void Awake()
     {   
+        player_Hp = player_MaxHP;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -50,10 +54,7 @@ public class state_s : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("스텟 초기화");
-        player_Atack = player_Atack + 4f*Shop_Atack;
-        player_MaxHP = player_MaxHP + 10f*Shop_Hp;
-        moveSpeed = moveSpeed + Shop_speed; 
+        
     }
     public void Update()
     {
@@ -147,11 +148,26 @@ public class state_s : MonoBehaviour
         /*player_Atack = player_Atack + 4f*Shop_Atack;
         player_MaxHP = player_MaxHP + 10f*Shop_Hp;
         moveSpeed = moveSpeed + Shop_speed; */
-        
+        Debug.Log("스텟 초기화");
+        player_Atack = player_Atack + 4f*Shop_Atack;
+        player_MaxHP = player_MaxHP + 10f*Shop_Hp;
+        moveSpeed = moveSpeed + Shop_speed; 
+        if(Shop_speed >= 10)
+        {
+            player_Atack = (player_Atack + 4f*Shop_Atack)*moveSpeed/20;
+
+        }
+        if(ad == true)
+        {
+            if(player_MaxHP/player_Hp>10)
+            {
+                player_Atack = player_Atack*11;
+            }
+            else
+            {
+                player_Atack = player_Atack + player_MaxHP/player_Hp;
+            }
+        }
     }
-
-
-        
     
-
 }

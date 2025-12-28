@@ -21,7 +21,7 @@ public class Portal_boss : MonoBehaviour
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.Space))
         {
             GameManager.instance.nextSpawnPoint = spawnPosition;
-            Debug.Log("아카네리제 최고다!!");
+            Debug.Log("씬 이동함!!");
             SceneManager.LoadScene("boss");
         }
     }

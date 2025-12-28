@@ -13,7 +13,7 @@ public class ObstacleDamage : MonoBehaviour
             
         
             // 매 틱마다 데미지 전달
-            Debug.Log("아카네 리제 사랑해!!!!");
+            Debug.Log("보스한테 맞은 틱!!!!");
             
         }
     }
