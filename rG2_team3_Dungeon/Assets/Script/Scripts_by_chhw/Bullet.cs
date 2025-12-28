@@ -5,31 +5,33 @@ public class Bullet : MonoBehaviour
     public float damage;
     public int penetration;
 
-    Vector3 dir;
+    Rigidbody2D rigid;
+
+    void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
 
     public void Init(float dmg, int p, Vector3 d)
     {
         this.damage = dmg;
         this.penetration = p;
-        this.dir = d;
-    }
-
-    void Update()
-    {
-        transform.position += (Vector3)(dir * Time.deltaTime);
+        
+        if(penetration > -1)
+        {
+            rigid.linearVelocity = d;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || !collision.CompareTag("Tile"))
-            return;
+        if(!collision.CompareTag("Enemy") || penetration == -1) return;
 
-        if (penetration > 0)
+        penetration--;
+
+        if(penetration == -1)
         {
-            penetration--;
-        }
-        else
-        {
+            rigid.linearVelocity = Vector2.zero;
             gameObject.SetActive(false);
         }
     }
