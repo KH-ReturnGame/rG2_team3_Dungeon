@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bc9ce5b6e847a4ca9192ebad719377, type: 3}
   m_Name: Recovery
   m_EditorClassIdentifier: 
-  id: 
-  itemName: 
+  id: item_rec
+  itemName: "\uD68C\uBCF5\uBB3C\uC57D"
   icon: {fileID: 0}
   description: 
-  price: 0
-  maxCount: 0
+  price: 400
+  maxCount: 1
   ownedCount: 0

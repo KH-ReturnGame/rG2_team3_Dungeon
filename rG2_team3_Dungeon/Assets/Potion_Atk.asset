@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bc9ce5b6e847a4ca9192ebad719377, type: 3}
   m_Name: Potion_Atk
   m_EditorClassIdentifier: 
-  itemName: Potion1
+  id: item_atk
+  itemName: "\uACF5\uACA9\uB825 \uC5C5 \uD3EC\uC158"
   icon: {fileID: 0}
-  description: none
+  description: 
   price: 100
+  maxCount: 10
   ownedCount: 10
