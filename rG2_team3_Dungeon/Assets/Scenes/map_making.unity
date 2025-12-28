@@ -817,7 +817,7 @@ MonoBehaviour:
   maxY: 11
   spawnableLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   boxSize: {x: 44.1, y: 26.2, z: 0}
   boxRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!4 &976552895

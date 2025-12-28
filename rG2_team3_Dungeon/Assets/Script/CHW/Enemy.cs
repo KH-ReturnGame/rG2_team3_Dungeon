@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class Enemy : MonoBehaviour
         if (!collision.CompareTag("Bullet")) return;
 
         health -= collision.GetComponent<Bullet>().damage;
-
+        StartCoroutine(KnockBack());
         if(health > 0)
         {
 
@@ -84,5 +85,13 @@ public class Enemy : MonoBehaviour
     public void Dead()
     {
         gameObject.SetActive(false);
+    }
+
+    IEnumerator KnockBack()
+    {
+        yield return new WaitForFixedUpdate();
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dirVec = transform.position - playerPos;
+        rigid.AddForce(dirVec.normalized * 4, ForceMode2D.Impulse);
     }
 }
