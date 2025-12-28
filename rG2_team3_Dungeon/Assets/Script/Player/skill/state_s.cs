@@ -8,7 +8,10 @@ public class state_s : MonoBehaviour
     public int Shop_Atack = 0;   
     public int Shop_speed = 0;
 
-    public float moveSpeed = 10f; // 기본 속도
+
+    public float player_Atack = 10f;
+    public float player_MaxHP = 100f;
+    public float moveSpeed = 10f;
 
     [Header("돌진 (Skill 1)")]
     private bool canDash = true;
@@ -44,9 +47,16 @@ public class state_s : MonoBehaviour
             originalColor = spriteRenderer.color;
         }
     }
-
+    void Start()
+    {
+        Debug.Log("스텟 초기화 앙 섹스");
+        player_Atack = player_Atack + 4f*Shop_Atack;
+        player_MaxHP = player_MaxHP + 10f*Shop_Hp;
+        moveSpeed = moveSpeed + Shop_speed; 
+    }
     public void Update()
     {
+        
         if (isDashing) return;
 
         // 1. 입력 감지
@@ -72,7 +82,7 @@ public class state_s : MonoBehaviour
         }
 
         // [Q] 돌진 스킬
-        if (Input.GetKeyDown(KeyCode.Q) && canDash)
+        if (Input.GetKeyDown(KeyCode.Q) && canDash && Shop_speed >= 2)
         {
             StartCoroutine(Dash());
         }
