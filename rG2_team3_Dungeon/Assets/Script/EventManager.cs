@@ -3,10 +3,10 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
-    public Vector3 nextSpawnPoint; // ´ÙÀ½ ¾À¿¡¼­ ³ªÅ¸³¯ À§Ä¡ ÀúÀå
+    public Vector3 nextSpawnPoint;
 
-    public float player_MaxHP = 100f;//ÃÖ´ëÃ¼·Â
-    public float player_Atack = 10f;//ÇÃ·¹ÀÌ¾î °ø°Ý·Â
+    public float player_MaxHP = 100f;//ï¿½Ö´ï¿½Ã¼ï¿½ï¿½
+    public float player_Atack = 10f;//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
 
     public bool skill_2 = false;
     public bool skill_3 = false;

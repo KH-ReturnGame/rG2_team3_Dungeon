@@ -4,12 +4,12 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    // ¿òÁ÷ÀÓ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     Vector2 inputVec;
     public float speed = 5;
     public float health = 160;
     
-    // ÄÄÆ÷³ÍÆ® º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     Rigidbody2D rigid;
     SpriteRenderer spriter;
 
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        // ÄÄÆ÷³ÍÆ® º¯¼ö ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
     }
@@ -32,9 +32,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ¹æÇâ ÀÔ·Â
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
+        //inputVec.x = Input.GetAxisRaw("Horizontal");
+        //inputVec.y = Input.GetAxisRaw("Vertical");
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -44,14 +44,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ÀÌµ¿
-        Vector2 nextVec = inputVec.normalized * Time.fixedDeltaTime * speed;
-        rigid.MovePosition(rigid.position + nextVec);
+        // ï¿½Ìµï¿½
+        //Vector2 nextVec = inputVec.normalized * Time.fixedDeltaTime * speed;
+        //rigid.MovePosition(rigid.position + nextVec);
     }
 
     void LateUpdate()
     {
-        // ÁÂ¿ì ¹İÀü
+        // ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         if(inputVec.x != 0)
         {
             spriter.flipX = inputVec.x > 0;
@@ -117,6 +117,6 @@ public class Player : MonoBehaviour
     void TakeDamage(float dmg)
     {
         health -= dmg;
-        Debug.Log($"ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö: {dmg}");
+        Debug.Log($"í”Œë ˆì´ì–´ í”¼ê²©! í˜„ì¬ ì²´ë ¥: {health}");
     }
 }

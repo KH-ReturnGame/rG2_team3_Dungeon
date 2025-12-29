@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/map_making.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
     path: Assets/Scenes/home.unity
     guid: 881eaea1aaff31b46a8d466f02ae8811
+  - enabled: 1
+    path: Assets/Scenes/map_making.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/map_select.unity
     guid: 8f3e4fdf6161da14c93ee252bcec00bd
@@ -23,6 +23,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/maps/boss.unity
     guid: 633158f4a4ca6d54aa0d144c71a602f2
+  - enabled: 1
+    path: Assets/Scenes/KDH.unity
+    guid: 7e4fbd1fcbbd24e488719f03542b9cb5
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: dff6a33dd3b36fa40b5a33734828c964
+  - enabled: 1
+    path: Assets/Scenes/gameover.unity
+    guid: d77f9586adaf4014ab9c6edcd2c1c93b
+  - enabled: 1
+    path: Assets/Scenes/ClearScene.unity
+    guid: a9ca2ab9fa78e9d43ba1637c0ec332e5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

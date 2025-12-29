@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // °¢Á¾ ½ºÅ©¸³Æ®ÀÇ µ¥ÀÌÅÍ ÂüÁ¶
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public static GameManager instance;
-
+    public Vector3 nextSpawnPoint;
     public PoolManager pool;
     public Player player;
 
