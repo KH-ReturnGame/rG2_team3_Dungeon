@@ -8,7 +8,9 @@ public class boom : MonoBehaviour
     public float activeDuration = 1.5f;  // 빔 유지 시간
 
     private GameObject head;
-    private GameObject beam;
+    public GameObject beam;
+
+    //public Animator animator;
 
     void Awake()
     {
@@ -57,6 +59,7 @@ public class boom : MonoBehaviour
         {
             beam.SetActive(true);
             Debug.Log("빔 공격 시작!");
+            //animator.SetTrigger("a");
         }
 
         // 5. 유지 시간 후 모두 종료
@@ -65,4 +68,12 @@ public class boom : MonoBehaviour
         if (head != null) head.SetActive(false);
         // 부모가 꺼지면 자식인 빔도 같이 꺼짐
     }
+
+    //void Go(){
+    //    beam.SetActive(true);
+    //}
+
+    //void stop(){
+    //    beam.SetActive(false);
+    //}
 }

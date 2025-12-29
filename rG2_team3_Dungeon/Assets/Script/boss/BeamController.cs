@@ -39,7 +39,7 @@ public class BeamController : MonoBehaviour
     {
         // 1. 빔 오브젝트 초기화 (꺼진 상태 확인)
         beamObject.SetActive(false);
-
+        
         // 2. 1초 대기 (머리가 소환되어 기를 모으는 시간)
         yield return new WaitForSeconds(beamDelay);
 

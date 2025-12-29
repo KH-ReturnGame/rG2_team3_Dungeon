@@ -7,13 +7,15 @@ public class BossChildController : MonoBehaviour
     public GameObject childToMove; 
 
     [Header("가로 이동 설정 (상대 X 좌표)")]
-    public float startX = 4.2f;      // 시작 지점 (4.2)
-    public float endX = 0.9f;        // 목표 지점 (0.9)
+    public float startX = 17f;
+    public float endX = 4f;        
     public float moveDuration = 25f; // 속도를 더 늦춤 (20초 동안 이동)
 
     [Header("랜덤 주기")]
     public float minInterval = 10f;
     public float maxInterval = 20f;
+
+    public Animator animator;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class BossChildController : MonoBehaviour
         {
             // 1. 랜덤 대기
             yield return new WaitForSeconds(Random.Range(minInterval, maxInterval));
+            animator.SetTrigger("code");
 
             // 2. 가로 이동 (4.2 -> 0.9)
             yield return StartCoroutine(MoveHorizontal(startX, endX));
