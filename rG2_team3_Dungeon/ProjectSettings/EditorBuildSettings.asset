@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/maps/forest.unity
     guid: 3342d72088c13594fa6ebdc2a9ca3ab2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/maps/sea.unity
     guid: 0f57df8cfe9795b46ae5fa45b3ec8feb
+  - enabled: 1
+    path: Assets/Scenes/maps/boss.unity
+    guid: 633158f4a4ca6d54aa0d144c71a602f2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

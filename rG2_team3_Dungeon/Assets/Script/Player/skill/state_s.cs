@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // 씬 관리에 필요
 
 public class state_s : MonoBehaviour
 {
@@ -8,12 +9,18 @@ public class state_s : MonoBehaviour
     public int Shop_Atack = 0;   
     public int Shop_speed = 0;
 
-    public float moveSpeed = 10f; // 기본 속도
+
+    public float player_Atack = 10f;
+    public float player_MaxHP = 100f;
+    public float player_Hp;
+    public float moveSpeed = 10f;
+
+    public bool ad = false;
 
     [Header("돌진 (Skill 1)")]
     private bool canDash = true;
     private bool isDashing;
-    [SerializeField] private float dashingPower = 35f; 
+    [SerializeField] private float dashingPower = 80f; 
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
 
@@ -32,6 +39,7 @@ public class state_s : MonoBehaviour
 
     void Awake()
     {   
+        player_Hp = player_MaxHP;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -44,7 +52,10 @@ public class state_s : MonoBehaviour
             originalColor = spriteRenderer.color;
         }
     }
-
+    void Start()
+    {
+        
+    }
     public void Update()
     {
         if (isDashing) return;
@@ -72,7 +83,7 @@ public class state_s : MonoBehaviour
         }
 
         // [Q] 돌진 스킬
-        if (Input.GetKeyDown(KeyCode.Q) && canDash)
+        if (Input.GetKeyDown(KeyCode.Q) && canDash && Shop_speed >= 2)
         {
             StartCoroutine(Dash());
         }
@@ -117,4 +128,46 @@ public class state_s : MonoBehaviour
         isskill_2Cooldown = false;
         Debug.Log("쿨 돌았음");
     }
+
+    void OnEnable()
+    {
+        // 씬 로드 이벤트 연결
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        // 이벤트 연결 해제 (메모리 누수 방지)
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 씬이 로드될 때마다 실행됨
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log(scene.name + " 씬이 로드되었습니다!");
+        /*player_Atack = player_Atack + 4f*Shop_Atack;
+        player_MaxHP = player_MaxHP + 10f*Shop_Hp;
+        moveSpeed = moveSpeed + Shop_speed; */
+        Debug.Log("스텟 초기화");
+        player_Atack = player_Atack + 4f*Shop_Atack;
+        player_MaxHP = player_MaxHP + 10f*Shop_Hp;
+        moveSpeed = moveSpeed + Shop_speed; 
+        if(Shop_speed >= 10)
+        {
+            player_Atack = (player_Atack + 4f*Shop_Atack)*moveSpeed/20;
+
+        }
+        if(ad == true)
+        {
+            if(player_MaxHP/player_Hp>10)
+            {
+                player_Atack = player_Atack*11;
+            }
+            else
+            {
+                player_Atack = player_Atack + player_MaxHP/player_Hp;
+            }
+        }
+    }
+    
 }
