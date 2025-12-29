@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
     // 움직임
     Vector2 inputVec;
     public float speed = 5;
+    public float health = 160;
     
     // 컴포넌트 변수
     Rigidbody2D rigid;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     public float attackCooldown = 0.5f;
 
     float lastAttackTime;
+    private bool isTakingDamage = false;
 
     void Awake()
     {
@@ -81,5 +84,39 @@ public class Player : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.WorldToScreenPoint(transform.position).z;
         return Camera.main.ScreenToWorldPoint(mousePos);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            if (!isTakingDamage)
+                StartCoroutine(DamageCoroutine());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            isTakingDamage = false;
+        }
+    }
+
+    IEnumerator DamageCoroutine()
+    {
+        isTakingDamage = true;
+
+        while (isTakingDamage)
+        {
+            TakeDamage(GetComponent<Enemy>().damage);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    void TakeDamage(float dmg)
+    {
+        health -= dmg;
+        Debug.Log($"플레이어 데미지: {dmg}");
     }
 }

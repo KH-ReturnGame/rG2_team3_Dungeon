@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     // 움직임
     public float speed = 3;
     public float health;
+    public float damage;
     public Sprite[] sprites;
     Rigidbody2D target;
 
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     // 컴포넌트 변수
     Rigidbody2D rigid;
     SpriteRenderer spriter;
+
+    private bool isAttacking = false;
 
     void Awake()
     {
@@ -64,21 +67,42 @@ public class Enemy : MonoBehaviour
         spriter.sprite = sprites[data.spriteType];
         speed = data.speed;
         health = data.health;
+        damage = data.damage;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Bullet")) return;
+        if(!(collision.CompareTag("Bullet") || collision.CompareTag("Player"))) return;
 
-        health -= collision.GetComponent<Bullet>().damage;
-        StartCoroutine(KnockBack());
-        if(health > 0)
+        if(collision.CompareTag("Bullet"))
         {
+            health -= collision.GetComponent<Bullet>().damage;
+            StartCoroutine(KnockBack());
+            if (health > 0)
+            {
 
+            }
+            else
+            {
+                Dead();
+            }
         }
-        else
+        else if(collision.CompareTag("Player"))
         {
-            Dead();
+            Player player = collision.GetComponent<Player>();
+            
+            if(!isAttacking)
+            {
+                StartCoroutine(Attack(player));
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            isAttacking = false;
         }
     }
 
@@ -93,5 +117,17 @@ public class Enemy : MonoBehaviour
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
         rigid.AddForce(dirVec.normalized * 4, ForceMode2D.Impulse);
+    }
+
+    IEnumerator Attack(Player player)
+    {
+        isAttacking = true;
+
+        while(isAttacking)
+        {
+            player.health -= damage;
+            Debug.Log("player get damaged!");
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

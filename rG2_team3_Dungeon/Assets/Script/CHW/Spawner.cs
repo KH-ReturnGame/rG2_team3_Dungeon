@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         // 몬스터 종류 초기화
-        monsType = Random.Range(0, 3);
+        //monsType = Random.Range(0, GetComponent<Enemy>().sprites.Length);
     }
 
     public void Spawn()
@@ -27,6 +27,7 @@ public class Spawner : MonoBehaviour
         // 몬스터 스폰
         GameObject enemy = GameManager.instance.pool.Get(0);
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+        monsType = Random.Range(0, spawnData.Length);
         enemy.GetComponent<Enemy>().Init(spawnData[monsType]);
     }
 }
@@ -38,4 +39,5 @@ public class SpawnData
     public int spriteType;
     public float health;
     public float speed;
+    public float damage;
 }

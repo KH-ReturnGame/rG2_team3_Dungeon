@@ -3281,12 +3281,15 @@ MonoBehaviour:
   - spriteType: 0
     health: 20
     speed: 1
+    damage: 10
   - spriteType: 1
     health: 60
     speed: 2
+    damage: 20
   - spriteType: 2
     health: 100
     speed: 3
+    damage: 30
 --- !u!4 &1138916094
 Transform:
   m_ObjectHideFlags: 0
@@ -3629,12 +3632,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  health: 160
   meleeWeapon: {fileID: 1583261361}
   rangeWeapon: {fileID: 1170646426}
   attackRange: 1.7
   attackCooldown: 0.5
---- !u!58 &1333956374
-CircleCollider2D:
+--- !u!70 &1333956374
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3668,7 +3672,8 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.5
+  m_Size: {x: 0.7578125, y: 1.1015625}
+  m_Direction: 0
 --- !u!1 &1363441854
 GameObject:
   m_ObjectHideFlags: 0
