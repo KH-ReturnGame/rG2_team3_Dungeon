@@ -22,7 +22,7 @@ public class Portal_sea : MonoBehaviour
         {
             GameManager.instance.nextSpawnPoint = spawnPosition;
             Debug.Log("아카네리제 최고다!!");
-            SceneManager.LoadScene("KDH");
+            SceneManager.LoadScene("KDH ");
         }
     }
 
