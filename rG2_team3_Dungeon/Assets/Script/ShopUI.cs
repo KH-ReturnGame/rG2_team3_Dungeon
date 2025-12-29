@@ -23,7 +23,7 @@ public class ShopUI : MonoBehaviour
 
         itemNameText.text = item.itemName;
         itemDescriptionText.text = item.description;
-        ownedCountText.text = "보유: " + item.ownedCount;
+        ownedCountText.text = "보유: " + item.ownedCount + " / " + item.maxCount;
         itemIcon.sprite = item.icon;
     }
 
@@ -31,16 +31,23 @@ public class ShopUI : MonoBehaviour
     {
         if (currentItem == null) return;
 
+        // 최대 구매 가능 개수 체크
+        if (currentItem.ownedCount + quantity > currentItem.maxCount)
+        {
+            Debug.Log(currentItem.itemName + " : 최대 구매 개수를 초과했습니다!");
+            return;
+        }
+
         int totalPrice = currentItem.price * quantity;
 
         if (currencyManager.SpendGold(totalPrice))
         {
             currentItem.ownedCount += quantity;
-            ownedCountText.text = "보유: " + currentItem.ownedCount;
+            ownedCountText.text = "보유: " + currentItem.ownedCount + " / " + currentItem.maxCount;
         }
         else
         {
-            Debug.Log("돈 부족");
+            Debug.Log("골드가 부족합니다.");
         }
     }
-}
+} // 이 중괄호가 빠져있었을 확률이 높습니다!
