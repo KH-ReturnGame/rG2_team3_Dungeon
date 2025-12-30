@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     public int count;
     public float speed;
 
-    bool isAttacking;
+    bool isAttacking = false;
 
     public void Attack(Vector3 targetPos)
     {
@@ -20,7 +20,6 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
-                StopCoroutine(MeleeAttack());
                 StartCoroutine(MeleeAttack());
                 break;
             case 1:
@@ -32,25 +31,23 @@ public class Weapon : MonoBehaviour
     IEnumerator MeleeAttack()
     {
         float rotated = 0;
-
-        GameObject meleeObj = new GameObject("MeleeAttack");
-        meleeObj.transform.position = transform.position;
-        meleeObj.transform.parent = transform;
+        isAttacking = true;
         yield return null;
 
-        SetForm(meleeObj);
+        SetForm();
         yield return null;
 
-        float delta = speed * Time.deltaTime;
-        transform.Rotate(Vector3.forward * delta);
-        rotated += Mathf.Abs(delta);
-
-        if(rotated >= 360)
+        while (rotated < 360)
         {
+            float delta = speed * Time.deltaTime;
+            transform.Rotate(Vector3.forward * delta);
+            rotated += Mathf.Abs(delta);
             yield return null;
         }
 
-        Destroy(meleeObj);
+        ClearChildren();
+        gameObject.SetActive(false);
+        isAttacking = false;
     }
 
     void RangeAttack(Vector3 targetPos)
@@ -62,19 +59,29 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Bullet>().Init(damage, 0, dir * speed);
     }
 
-    void SetForm(GameObject obj)
+    void SetForm()
     {
-            for (int i = 0; i < count; i++)
-            {
-                Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
-                bullet.parent = obj.transform;
-                bullet.position = Vector2.zero;
+        for (int i = 0; i < count; i++)
+        {
+            Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+            bullet.parent = transform;
+            bullet.position = transform.position;
 
-                Vector3 rotVec = Vector3.forward * 360 * i / count;
-                bullet.Rotate(rotVec);
-                bullet.Translate(Vector2.up * 1.2f, Space.Self);
+            Vector3 rotVec = Vector3.forward * 360 * i / count;
+            bullet.Rotate(rotVec);
+            bullet.Translate(Vector2.up * 1.2f, Space.Self);
 
-                bullet.GetComponent<Bullet>().Init(damage, -1, Vector2.zero);
-            }
+            bullet.GetComponent<Bullet>().Init(damage, -1, Vector2.zero);
+        }
+    }
+
+    void ClearChildren()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
+            child.SetParent(null);
+            child.gameObject.SetActive(false);
+        }
     }
 }
