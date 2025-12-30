@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +23,7 @@ public class Portal_forest : MonoBehaviour
         {
             EventManager.instance.nextSpawnPoint = spawnPosition;
             Debug.Log("아카네리제 최고다!!");
-            SceneManager.LoadScene("forest");
+            SceneManager.LoadScene("SampleScene");
         }
     }
 

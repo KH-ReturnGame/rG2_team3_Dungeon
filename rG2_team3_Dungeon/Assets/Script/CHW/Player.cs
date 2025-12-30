@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // ������
     Vector2 inputVec;
     public float speed = 5;
-    public float health = 160;
+    //public float health = 160;
     
     // ������Ʈ ����
     Rigidbody2D rigid;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public float attackCooldown = 0.5f;
 
     float lastAttackTime;
-    private bool isTakingDamage = false;
+    //private bool isTakingDamage = false;
 
     void Awake()
     {
@@ -52,10 +52,10 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
         // �¿� ����
-        if(inputVec.x != 0)
-        {
-            spriter.flipX = inputVec.x > 0;
-        }
+        //if(inputVec.x != 0)
+        //{
+        //    spriter.flipX = inputVec.x > 0;
+        //}
     }
 
     void TryAttack()
@@ -86,37 +86,37 @@ public class Player : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            if (!isTakingDamage)
-                StartCoroutine(DamageCoroutine());
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Enemy"))
+    //    {
+    //        if (!isTakingDamage)
+    //            StartCoroutine(DamageCoroutine());
+    //    }
+    //}
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            isTakingDamage = false;
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Enemy"))
+    //    {
+    //        isTakingDamage = false;
+    //    }
+    //}
 
-    IEnumerator DamageCoroutine()
-    {
-        isTakingDamage = true;
+    //IEnumerator DamageCoroutine()
+    //{
+    //    isTakingDamage = true;
 
-        while (isTakingDamage)
-        {
-            TakeDamage(GetComponent<Enemy>().damage);
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
+    //    while (isTakingDamage)
+    //    {
+    //        TakeDamage(GetComponent<Enemy>().damage);
+    //        yield return new WaitForSeconds(0.5f);
+    //    }
+    //}
 
-    void TakeDamage(float dmg)
-    {
-        health -= dmg;
-        Debug.Log($"플레이어 피격! 현재 체력: {health}");
-    }
+    //void TakeDamage(float dmg)
+    //{
+    //    health -= dmg;
+    //    Debug.Log($"플레이어 피격! 현재 체력: {health}");
+    //}
 }

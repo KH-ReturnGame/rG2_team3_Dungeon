@@ -2898,7 +2898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &390119041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3007,7 +3007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &482994857
 Transform:
   m_ObjectHideFlags: 0
@@ -3055,7 +3055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &556504672
 Transform:
   m_ObjectHideFlags: 0
@@ -3083,6 +3083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882b1ba5962ad494b9ad5a6e3e27872b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextSpawnPoint: {x: 0, y: 0, z: 0}
   pool: {fileID: 482994858}
   player: {fileID: 1333956373}
 --- !u!1 &941877573
@@ -3481,7 +3482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1333956368
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public Vector3 nextSpawnPoint;
     public PoolManager pool;
     public Player player;
+    public state_s status;
 
     void Awake()
     {

@@ -74,6 +74,7 @@ public class state_s : MonoBehaviour
     public void TakeDamage(float damage) {
         if (isInvincible) return;
         player_Hp -= damage;
+        Debug.Log($"플레이어 피격! 현재 체력: {player_Hp}");
         if (player_Hp <= 0) {Die();}
     }
 

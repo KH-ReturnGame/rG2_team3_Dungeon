@@ -89,11 +89,9 @@ public class Enemy : MonoBehaviour
         }
         else if(collision.CompareTag("Player"))
         {
-            Player player = collision.GetComponent<Player>();
-            
             if(!isAttacking)
             {
-                StartCoroutine(Attack(player));
+                StartCoroutine(Attack(GameManager.instance.status));
             }
         }
     }
@@ -119,13 +117,13 @@ public class Enemy : MonoBehaviour
         rigid.AddForce(dirVec.normalized * 4, ForceMode2D.Impulse);
     }
 
-    IEnumerator Attack(Player player)
+    IEnumerator Attack(state_s player)
     {
         isAttacking = true;
 
         while(isAttacking)
         {
-            player.health -= damage;
+            player.TakeDamage(damage);
             Debug.Log("player get damaged!");
             yield return new WaitForSeconds(0.5f);
         }
